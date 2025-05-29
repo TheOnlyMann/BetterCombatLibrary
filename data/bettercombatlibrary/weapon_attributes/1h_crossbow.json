@@ -1,0 +1,24 @@
+{
+  "attributes": {
+    "range_bonus": 0,
+    "category": "shield",
+    "attacks": [
+      {
+        "hitbox": "VERTICAL_PLANE",
+        "conditions":["NOT_DUAL_WIELDING"],
+        "damage_multiplier": 1,
+        "angle": 90,
+        "upswing": 0.3,
+        "animation": "bettercombat:two_handed_slam"
+      },
+      {
+        "hitbox": "FORWARD_BOX",
+        "conditions":["DUAL_WIELDING_ANY"],
+        "damage_multiplier": 0.3,
+        "angle": 120,
+        "upswing": 0.5,
+        "animation": "bettercombat:one_handed_slam"
+      }
+    ]
+  }
+}

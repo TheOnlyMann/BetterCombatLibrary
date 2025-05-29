@@ -1,0 +1,76 @@
+{
+  "attributes": {
+    "range_bonus": 0,
+    "category": "sword",
+    "attacks": [
+      {
+        "hitbox": "HORIZONTAL_PLANE",
+        "conditions":["MAIN_HAND_ONLY"],
+        "damage_multiplier": 0.9,
+        "angle": 135,
+        "upswing": 0.5,
+        "animation": "bettercombat:one_handed_slash_horizontal_right",
+        "swing_sound": {
+          "id": "bettercombat:sword_slash"
+        }
+      },
+      {
+        "hitbox": "FORWARD_BOX",
+        "conditions":["NOT_DUAL_WIELDING"],
+        "damage_multiplier": 1.2,
+        "angle": 0,
+        "upswing": 0.5,
+        "animation": "bettercombat:two_handed_stab_left",
+        "swing_sound": {
+          "id": "bettercombat:claymore_stab"
+        }
+      },
+      {
+        "hitbox": "VERTICAL_PLANE",
+        "conditions":["MAIN_HAND_ONLY","NO_OFFHAND_ITEM"],
+        "damage_multiplier": 1.3,
+        "angle": 90,
+        "upswing": 0.5,
+        "animation": "bettercombat:two_handed_slam",
+        "swing_sound": {
+          "id": "bettercombat:claymore_slam"
+        }
+      },
+      {
+        "hitbox": "FORWARD_BOX",
+        "conditions":["MAIN_HAND_ONLY","DUAL_WIELDING_ANY"],
+        "damage_multiplier": 1.2,
+        "angle": 90,
+        "upswing": 0.5,
+        "animation": "bettercombat:one_handed_stab",
+        "swing_sound": {
+          "id": "bettercombat:sword_slash",
+          "pitch": 1.1
+        }
+      },
+      {
+        "conditions": ["DUAL_WIELDING_ANY", "OFF_HAND_ONLY"],
+        "hitbox": "VERTICAL_PLANE",
+        "damage_multiplier": 0.8,
+        "angle": 90,
+        "upswing": 0.5,
+        "animation": "bettercombat:one_handed_uppercut_right",
+        "swing_sound": {
+          "id": "bettercombat:sword_slash",
+          "pitch": 1.2
+        }
+      },
+      {
+        "conditions": ["DUAL_WIELDING_ANY"],
+        "hitbox": "HORIZONTAL_PLANE",
+        "damage_multiplier": 0.8,
+        "angle": 90,
+        "upswing": 0.5,
+        "animation": "bettercombat:one_handed_slash_horizontal_left",
+        "swing_sound": {
+          "id": "bettercombat:sword_slash"
+        }
+      }
+    ]
+  }
+}

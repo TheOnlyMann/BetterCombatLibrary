@@ -1,0 +1,84 @@
+{
+  "attributes": {
+    "range_bonus": 0,
+    "category": "axe",
+    "attacks": [
+      {
+        "hitbox": "HORIZONTAL_PLANE",
+        "damage_multiplier": 1,
+        "angle": 60,
+        "upswing": 0.5,
+        "animation": "bettercombat:one_handed_slash_horizontal_right",
+        "swing_sound": {
+          "id": "bettercombat:pickaxe_swing"
+        }
+      },
+      {
+        "conditions": ["DUAL_WIELDING_SAME_CATEGORY", "MAIN_HAND_ONLY"],
+        "hitbox": "FORWARD_BOX",
+        "damage_multiplier": 2,
+        "angle": 60,
+        "upswing": 0.5,
+        "animation": "bettercombat:dual_handed_slash_cross",
+        "swing_sound": {
+          "id": "bettercombat:scythe_slash"
+        }
+      },
+      {
+        "conditions": ["DUAL_WIELDING_SAME_CATEGORY", "OFF_HAND_ONLY"],
+        "hitbox": "FORWARD_BOX",
+        "damage_multiplier": 0.1,
+        "angle": 60,
+        "upswing": 0.5,
+        "animation": "bettercombat:one_handed_stab",
+        "swing_sound": {
+          "id": "bettercombat:wand_swing"
+        }
+      },
+      {
+        "hitbox": "HORIZONTAL_PLANE",
+        "conditions":["NOT_DUAL_WIELDING"],
+        "damage_multiplier": 1,
+        "angle": 60,
+        "upswing": 0.5,
+        "animation": "bettercombat:one_handed_slash_horizontal_left",
+        "swing_sound": {
+          "id": "bettercombat:pickaxe_swing"
+        }
+      },
+      {
+        "hitbox": "VERTICAL_PLANE",
+        "conditions":["NOT_DUAL_WIELDING"],
+        "damage_multiplier": 1,
+        "angle": 60,
+        "upswing": 0.5,
+        "animation": "bettercombat:one_handed_slam",
+        "swing_sound": {
+          "id": "bettercombat:pickaxe_swing"
+        }
+      },
+      {
+        "hitbox": "VERTICAL_PLANE",
+        "conditions":["OFF_HAND_ONLY"],
+        "damage_multiplier": 1,
+        "angle": 60,
+        "upswing": 0.5,
+        "animation": "bettercombat:one_handed_slam",
+        "swing_sound": {
+          "id": "bettercombat:pickaxe_swing"
+        }
+      },
+      {
+        "hitbox": "VERTICAL_PLANE",
+        "damage_multiplier": 1,
+        "conditions":["MAIN_HAND_ONLY"],
+        "angle": 60,
+        "upswing": 0.5,
+        "animation": "bettercombat:one_handed_uppercut_right",
+        "swing_sound": {
+          "id": "bettercombat:pickaxe_swing"
+        }
+      }
+    ]
+  }
+}
