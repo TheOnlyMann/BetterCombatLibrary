@@ -9,7 +9,11 @@
         "damage_multiplier": 1,
         "angle": 90,
         "upswing": 0.3,
-        "animation": "bettercombat:two_handed_slam"
+        "animation": "bettercombat:two_handed_slam",
+        "swing_sound": {
+          "id": "bettercombat:staff_slash",
+          "pitch": -0.3
+        }
       },
       {
         "hitbox": "FORWARD_BOX",
@@ -17,7 +21,10 @@
         "damage_multiplier": 0.3,
         "angle": 120,
         "upswing": 0.5,
-        "animation": "bettercombat:one_handed_slam"
+        "animation": "bettercombat:one_handed_slam",
+        "swing_sound": {
+          "id": "bettercombat:staff_slash"
+        }
       }
     ]
   }
