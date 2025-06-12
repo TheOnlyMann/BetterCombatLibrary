@@ -21,7 +21,8 @@
         "upswing": 0.5,
         "animation": "bettercombat:two_handed_stab_left",
         "swing_sound": {
-          "id": "bettercombat:spear_stab"
+          "id": "bettercombat:rapier_stab",
+          "pitch": 0.8
         }
       },
       {
@@ -53,7 +54,8 @@
         "upswing": 0.5,
         "animation": "bettercombat:two_handed_stab_right",
         "swing_sound": {
-          "id": "bettercombat:spear_stab"
+          "id": "bettercombat:rapier_stab",
+          "pitch": 0.8
         }
       },
       {

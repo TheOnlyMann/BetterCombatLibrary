@@ -8,7 +8,7 @@
         "conditions":["MAIN_HAND_ONLY","NOT_DUAL_WIELDING"],
         "damage_multiplier": 0.8,
         "angle": 90,
-        "upswing": 0.3,
+        "upswing": 0.5,
         "animation": "bettercombat:one_handed_uppercut_right",
         "swing_sound": {
           "id": "bettercombat:axe_slash"
@@ -21,7 +21,7 @@
         "upswing": 0.5,
         "animation": "bettercombat:one_handed_slam",
         "swing_sound": {
-          "id": "bettercombat:claymore_slam"
+          "id": "bettercombat:axe_slash"
         }
       },
       {
