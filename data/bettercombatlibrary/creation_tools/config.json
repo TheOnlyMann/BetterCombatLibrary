@@ -1,0 +1,35 @@
+{
+  "pose": {
+    "one_handed":["","bettercombat:pose_one_handed_backwards"],
+    "two_handed":["bettercombat:pose_two_handed_sword"]
+  },
+  "attack": {
+    "VERTICAL_PLANE": {
+      "bettercombat:one_handed_uppercut_right": {
+        "angle": 90
+      }
+    },
+    "HORIZONTAL_PLANE": {
+      "bettercombat:one_handed_slash_horizontal_right": {
+        "angle": 90
+      }
+    },
+    "FORWARD_BOX": {
+      "bettercombat:dual_handed_slash_cross": {
+        "angle": 150
+      }
+    }
+  },
+  "condition_enum": [
+    "NOT_DUAL_WIELDING",
+    "DUAL_WIELDING_ANY",
+    "DUAL_WIELDING_SAME",
+    "DUAL_WIELDING_SAME_CATEGORY",
+    "NO_OFFHAND_ITEM",
+    "OFF_HAND_SHIELD",
+    "MAIN_HAND_ONLY",
+    "OFF_HAND_ONLY",
+    "MOUNTED",
+    "NOT_MOUNTED"
+  ]
+}
