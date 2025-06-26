@@ -1,11 +1,41 @@
 {
   "pose": {
-    "one_handed":["","bettercombat:pose_one_handed_backwards"],
-    "two_handed":["bettercombat:pose_two_handed_sword"]
+    "one_handed": [
+      "",
+      "bettercombat:pose_one_handed_backwards"
+    ],
+    "two_handed": [
+      "bettercombat:pose_two_handed_sword",
+      "bettercombat:pose_two_handed_bow",
+      "bettercombat:pose_two_handed_crossbow",
+      "bettercombat:pose_two_handed_heavy",
+      "bettercombat:pose_two_handed_katana",
+      "bettercombat:pose_two_handed_polearm",
+      "bettercombat:pose_two_handed_scythe",
+      "bettercombat:pose_two_handed_sword",
+      "malfu_combat_animation:pose_two_handed_sword_fps_hold",
+      "malfu_combat_animation:pose_two_handed_sword_hip",
+      "malfu_combat_animation:pose_two_handed_sword_side"
+    ]
   },
   "attack": {
     "VERTICAL_PLANE": {
+      "bettercombat:one_handed_slam": {
+        "angle": 90
+      },
       "bettercombat:one_handed_uppercut_right": {
+        "angle": 90
+      },
+      "bettercombat:two_handed_slam": {
+        "angle": 90
+      },
+      "bettercombat:two_handed_slam_heavy": {
+        "angle": 90
+      },
+      "bettercombat:two_handed_slash_vertical_left": {
+        "angle": 90
+      },
+      "bettercombat:two_handed_slam_vertical_right": {
         "angle": 90
       }
     },
@@ -17,6 +47,30 @@
     "FORWARD_BOX": {
       "bettercombat:dual_handed_slash_cross": {
         "angle": 150
+      },
+      "bettercombat:dual_handed_slash_uncross": {
+        "angle": 150
+      },
+      "bettercombat:dual_handed_stab": {
+        "angle": 150
+      },
+      "malfu_combat_animation:axe_double_updown": {
+        "angle": 150
+      },
+      "bettercombat:one_handed_punch": {
+        "angle": 0
+      },
+      "bettercombat:one_handed_stab": {
+        "angle": 0
+      },
+      "bettercombat:one_handed_stab_mounted": {
+        "angle": 0
+      },
+      "bettercombat:two_handed_stab_left": {
+        "angle": 60
+      },
+      "bettercombat:two_handed_stab_right": {
+        "angle": 60
       }
     }
   },

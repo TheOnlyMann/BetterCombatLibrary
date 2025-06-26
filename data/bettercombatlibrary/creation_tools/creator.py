@@ -45,15 +45,24 @@ pose_entry.pack(side=tk.LEFT) #prepares for a dropdown menu to select pose optio
 
 def show_pose_menu():
     menu = tk.Menu(root, tearoff=0)
-    for pose_option, metadata in pose_defaults.items():
-        menu.add_command(label=pose_option or "<empty>", command=lambda p=pose_option, m=metadata: set_pose(p, m))
+    for handed_type in ["one_handed","two_handed"]:
+        if handed_type in pose_defaults:
+            prefix = "[2H]" if handed_type == "two_handed" else "[1H]"
+            for pose_option in pose_defaults[handed_type]:
+                label = f"{prefix} {pose_option or '<empty>'}"
+                menu.add_command(label=label, command=lambda p=pose_option, h=handed_type: set_pose(p, h == "two_handed"))
     menu.post(pose_entry.winfo_rootx(), pose_entry.winfo_rooty() + pose_entry.winfo_height())
 
-def set_pose(p, metadata=None):
+def set_pose(p, is_two_handed=None):
     pose_var.set(p)
-    if metadata is None:
-        metadata = pose_defaults.get(p, {})
-    two_handed_var.set(metadata.get("two_handed", False))
+    if is_two_handed is not None:
+        two_handed_var.set(is_two_handed)
+    else:
+        # Determine from grouped pose_defaults
+        for handedness, poses in pose_defaults.items():
+            if p in poses:
+                two_handed_var.set(handedness == "two_handed")
+                break
 
 tk.Button(pose_frame, text="▼", width=2, command=show_pose_menu).pack(side=tk.LEFT) # Button to show pose options
 
@@ -78,8 +87,12 @@ two_handed_pose_entry.pack(side=tk.LEFT) #prepares for a dropdown menu to select
 
 def show_two_handed_pose_menu():
     menu = tk.Menu(root, tearoff=0)
-    for pose_option in pose_defaults.keys():
-        menu.add_command(label=pose_option or "<empty>", command=lambda p=pose_option: two_handed_pose_var.set(p))
+    for handed_type in ["one_handed","two_handed"]:
+        if handed_type in pose_defaults:
+            prefix = "[2H]" if handed_type == "two_handed" else "[1H]"
+            for pose_option in pose_defaults[handed_type]:
+                label = f"{prefix} {pose_option or '<empty>'}"
+                menu.add_command(label=label, command=lambda p=pose_option: two_handed_pose_var.set(p))
     menu.post(two_handed_pose_entry.winfo_rootx(), two_handed_pose_entry.winfo_rooty() + two_handed_pose_entry.winfo_height())
 
 tk.Button(two_handed_pose_frame, text="▼", width=2, command=show_two_handed_pose_menu).pack(side=tk.LEFT) # Button to show two-handed pose options
@@ -93,8 +106,13 @@ off_hand_pose_entry.pack(side=tk.LEFT)
 
 def show_off_hand_pose_menu():
     menu = tk.Menu(root, tearoff=0)
-    for pose_option in pose_defaults.keys():
-        menu.add_command(label=pose_option or "<empty>", command=lambda p=pose_option: off_hand_pose_var.set(p))
+    for handed_type in ["one_handed","two_handed"]:
+        if handed_type in pose_defaults:
+            if handed_type == "two_handed":
+                continue  # Skip two-handed poses for off-hand
+            for pose_option in pose_defaults[handed_type]:
+                label = pose_option or "<empty>"
+                menu.add_command(label=label, command=lambda p=pose_option: off_hand_pose_var.set(p))
     menu.post(off_hand_pose_entry.winfo_rootx(), off_hand_pose_entry.winfo_rooty() + off_hand_pose_entry.winfo_height())
 
 tk.Button(off_hand_pose_frame, text="▼", width=2, command=show_off_hand_pose_menu).pack(side=tk.LEFT) # Button to show off-hand pose options
@@ -116,14 +134,56 @@ create_entry("Hitbox")
 trio_frame = tk.Frame(root)
 trio_frame.pack()
 
+def make_adjust_button(entry_ref, delta):
+    def adjust():
+        try:
+            current = float(entry_ref.get() or 0)
+            new_value = max(0.0, round(current + delta, 2))
+            entry_ref.delete(0, tk.END)
+            entry_ref.insert(0, f"{new_value:.2f}")
+        except ValueError:
+            pass
+    return adjust
+
+def make_adjust_button_int(entry_ref, delta):
+    def adjust():
+        try:
+            current = int(entry_ref.get() or 0)
+            new_value = max(0,current + delta)
+            entry_ref.delete(0, tk.END)
+            entry_ref.insert(0, str(new_value))
+        except ValueError:
+            pass
+    return adjust
+
 for label_text, default in [("Damage Multiplier", "1.0"), ("Angle", "0"), ("Upswing", "0.5")]:
     subframe = tk.Frame(trio_frame)
     subframe.pack(side=tk.LEFT, padx=5)
     tk.Label(subframe, text=label_text).pack()
-    entry = tk.Entry(subframe, width=15)
+    entry = tk.Entry(subframe, width=10)
     entry.insert(0, default)
-    entry.pack()
+    entry.pack(side=tk.LEFT, padx=2)
     fields[label_text] = entry
+    # Add +/- buttons for Damage Multiplier and Angle
+    if label_text == "Angle":
+        tk.Button(subframe, text="+", command=make_adjust_button_int(entry, +5),width=2).pack(side=tk.LEFT, padx=1)
+        tk.Button(subframe, text="-", command=make_adjust_button_int(entry, -5),width=2).pack(side=tk.LEFT, padx=1)
+    else:
+        tk.Button(subframe, text="+", command=make_adjust_button(entry, +0.1),width=2).pack(side=tk.LEFT, padx=1)
+        tk.Button(subframe, text="-", command=make_adjust_button(entry, -0.1),width=2).pack(side=tk.LEFT, padx=1)
+# 2nd grouped entries side by side for Attack Range Multiplier, Attack Speed Multiplier, Movement Speed Multiplier
+trio_2_frame = tk.Frame(root)
+trio_2_frame.pack()
+for label_text, default in [("Attack Range Multiplier", "1.0"), ("Attack Speed Multiplier", "1.0"), ("Movement Speed Multiplier", "1.0")]:
+    subframe = tk.Frame(trio_2_frame)
+    subframe.pack(side=tk.LEFT, padx=5)
+    tk.Label(subframe, text=label_text).pack()
+    entry = tk.Entry(subframe, width=10)
+    entry.insert(0, default)
+    entry.pack(side=tk.LEFT, padx=2)
+    fields[label_text] = entry
+    tk.Button(subframe, text="+", command=make_adjust_button(entry, +0.1),width=2).pack(side=tk.LEFT, padx=1)
+    tk.Button(subframe, text="-", command=make_adjust_button(entry, -0.1),width=2).pack(side=tk.LEFT, padx=1)
 
 create_entry("Animation")
 create_entry("Swing Sound ID", "bettercombat:sword_slash")
@@ -170,16 +230,16 @@ def set_anim_from_menu(widget, anim, hitbox):
         fields["Angle"].delete(0, tk.END)
         fields["Angle"].insert(0, str(angle))
 
-# Conditions checklist
+# Conditions checklist, make it a two-column layout
 tk.Label(root, text="Conditions:").pack()
 condition_vars = {}
 cond_frame = tk.Frame(root)
 cond_frame.pack()
-for cond in condition_enum:
+for i, cond in enumerate(condition_enum):
     var = tk.BooleanVar()
-    cb = tk.Checkbutton(cond_frame, text=cond, variable=var)
-    cb.pack(anchor="w")
     condition_vars[cond] = var
+    cb = tk.Checkbutton(cond_frame, text=cond, variable=var)
+    cb.grid(row=i // 2, column=i % 2, sticky='w')  # Two-column layout
 
 # Listbox to show and select attacks
 class DraggableListbox(tk.Listbox):
@@ -206,29 +266,35 @@ class DraggableListbox(tk.Listbox):
             attacks.insert(drop_index, attacks.pop(self._drag_data["index"]))
         self._drag_data = {"item": None, "index": None}
 
-listbox = DraggableListbox(root, width=60, height=10)
-listbox.pack()
+listbox_frame = tk.Frame(root)
+listbox_frame.pack()
+
+scrollbar = tk.Scrollbar(listbox_frame, orient=tk.VERTICAL)
+listbox = DraggableListbox(listbox_frame, width=60, height=10, yscrollcommand=scrollbar.set)
+scrollbar.config(command=listbox.yview)
+
+listbox.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
+scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
+
 
 # Add/Edit/Delete/Load/Save/Update Config
 
 def add_attack():
     try:
         conditions = [c for c, v in condition_vars.items() if v.get()]
-        damage_multiplier = float(fields["Damage Multiplier"].get() or 1.0)
         upswing = float(fields["Upswing"].get() or 0.5)
         swing_sound_id = fields["Swing Sound ID"].get() or "bettercombat:sword_slash"
         attack = {
             "hitbox": fields["Hitbox"].get(),
             "conditions": conditions,
-            "damage_multiplier": damage_multiplier,
+            "damage_multiplier": float(fields["Damage Multiplier"].get() or 1.0),
             "angle": int(fields["Angle"].get()),
             "upswing": upswing,
             "animation": fields["Animation"].get(),
             "swing_sound": {"id": swing_sound_id},
-            "attack_range_multiplier": 1.0,
-            "attack_speed_multiplier": 1.0,
-            "movement_speed_multiplier": 1.0,
-            "stamina_cost_multiplier": 1.0,
+            "attack_range_multiplier": float(fields["Attack Range Multiplier"].get() or 1.0),
+            "attack_speed_multiplier": float(fields["Attack Speed Multiplier"].get() or 1.0),
+            "movement_speed_multiplier": float(fields["Movement Speed Multiplier"].get() or 1.0),
             "damage_type": ""
         }
         attacks.append(attack)
@@ -252,6 +318,12 @@ def edit_attack():
         fields["Angle"].insert(0, attack.get("angle", 0))
         fields["Upswing"].delete(0, tk.END)
         fields["Upswing"].insert(0, attack.get("upswing", 0.0))
+        fields["Attack Range Multiplier"].delete(0, tk.END)
+        fields["Attack Range Multiplier"].insert(0, attack.get("attack_range_multiplier", 1.0))
+        fields["Attack Speed Multiplier"].delete(0, tk.END) 
+        fields["Attack Speed Multiplier"].insert(0, attack.get("attack_speed_multiplier", 1.0))
+        fields["Movement Speed Multiplier"].delete(0, tk.END)
+        fields["Movement Speed Multiplier"].insert(0, attack.get("movement_speed_multiplier", 1.0))
         fields["Animation"].delete(0, tk.END)
         fields["Animation"].insert(0, attack.get("animation", ""))
         fields["Swing Sound ID"].delete(0, tk.END)
@@ -295,6 +367,8 @@ def save_json():
         for opt in ["damage_multiplier", "attack_range_multiplier", "attack_speed_multiplier", "movement_speed_multiplier", "stamina_cost_multiplier", "damage_type"]:
             if opt in filtered and (filtered[opt] == 1.0 or filtered[opt] == ""):
                 del filtered[opt]
+        if "conditions" in filtered and not filtered["conditions"]:
+            del filtered["conditions"]
         data["attributes"]["attacks"].append(filtered)
     file = filedialog.asksaveasfilename(initialfile=json_filename.get(), defaultextension=".json", filetypes=[("JSON Files", "*.json")])
     if file:
@@ -318,11 +392,28 @@ def load_json():
                 attacks.append(atk)
                 listbox.insert(tk.END, atk.get("animation", "<unnamed>"))
 
+def restructure_pose_defaults():
+    grouped = {"two_handed": [], "one_handed": []}
+    for handed in ["one_handed","two_handed"]:
+        if handed in pose_defaults:
+            for pose in pose_defaults[handed]:
+                grouped[handed].append(pose)
+    return grouped
+
 def update_config():
     pose = pose_var.get().strip()
     two_handed = two_handed_var.get()
     if pose:
-        pose_defaults[pose] = {"two_handed": two_handed}
+        if two_handed:
+            if "two_handed" not in pose_defaults:
+                pose_defaults["two_handed"] = []
+            if pose not in pose_defaults["two_handed"]:
+                pose_defaults["two_handed"].append(pose)
+        else:
+            if "one_handed" not in pose_defaults:
+                pose_defaults["one_handed"] = []
+            if pose not in pose_defaults["one_handed"]:
+                pose_defaults["one_handed"].append(pose)
         anim = fields["Animation"].get()
         hitbox = fields["Hitbox"].get()
         angle = fields["Angle"].get()
