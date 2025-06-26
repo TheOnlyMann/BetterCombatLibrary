@@ -33,15 +33,36 @@
         "angle": 90
       },
       "bettercombat:two_handed_slash_vertical_left": {
-        "angle": 90
+        "angle": 120
       },
       "bettercombat:two_handed_slam_vertical_right": {
-        "angle": 90
+        "angle": 120
       }
     },
     "HORIZONTAL_PLANE": {
+      "bettercombat:one_handed_slash_horizontal_left": {
+        "angle": 90
+      },
       "bettercombat:one_handed_slash_horizontal_right": {
         "angle": 90
+      },
+      "bettercombat:one_handed_slash_switch_blade_left": {
+        "angle": 120
+      },
+      "bettercombat:one_handed_slash_switch_blade_right": {
+        "angle": 120
+      },
+      "bettercombat:one_handed_swipe_horizontal_right": {
+        "angle": 90
+      },
+      "bettercombat:two_handed_slash_horizontal_left": {
+        "angle": 150
+      },
+      "bettercombat:two_handed_slash_horizontal_right": {
+        "angle": 150
+      },
+      "bettercombat:two_handed_spin": {
+        "angle": 360
       }
     },
     "FORWARD_BOX": {
