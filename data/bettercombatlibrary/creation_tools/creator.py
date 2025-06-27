@@ -188,7 +188,44 @@ for label_text, default in [("Attack Range Multiplier", "1.0"), ("Attack Speed M
     tk.Button(subframe, text="-", command=make_adjust_button(entry, -0.1),width=2).pack(side=tk.LEFT, padx=1)
 
 create_entry("Animation")
-create_entry("Swing Sound ID", "bettercombat:sword_slash")
+tk.Label(root, text="Swing Sound ID and Pitch:").pack()
+sound_frame = tk.Frame(root)
+sound_frame.pack()
+sound_entry = tk.Entry(sound_frame, width=35)
+sound_entry.insert(0, "bettercombat:sword_slash")
+sound_entry.pack(side=tk.LEFT)
+fields["Swing Sound ID"] = sound_entry
+
+pitch_entry = tk.Entry(sound_frame, width=5)
+pitch_entry.insert(0, "0.0")
+pitch_entry.pack(side=tk.LEFT, padx=2)
+fields["Swing Sound Pitch"] = pitch_entry
+
+pitch_control = tk.Frame(sound_frame)
+pitch_control.pack(side=tk.LEFT)
+
+def make_pitch_adjust_button(entry_ref, delta):
+    def adjust():
+        try:
+            current = float(entry_ref.get() or 0)
+            new_value = round(current + delta, 2)
+            entry_ref.delete(0, tk.END)
+            entry_ref.insert(0, f"{new_value:.2f}")
+        except ValueError:
+            pass
+    return adjust
+
+tk.Button(pitch_control, text="+", command=make_pitch_adjust_button(pitch_entry, +0.1), width=2).pack(side=tk.LEFT)
+tk.Button(pitch_control, text="-", command=make_pitch_adjust_button(pitch_entry, -0.1), width=2).pack(side=tk.LEFT)
+
+
+def show_sound_menu():
+    menu = tk.Menu(root, tearoff=0)
+    for sid in sound_ids:
+        menu.add_command(label=sid, command=lambda s=sid: sound_entry.delete(0, tk.END) or sound_entry.insert(0, s) or pitch_entry.delete(0, tk.END) or pitch_entry.insert(0, "0.0"))
+    menu.post(sound_entry.winfo_rootx(), sound_entry.winfo_rooty() + sound_entry.winfo_height())
+
+tk.Button(sound_frame, text="▼", width=2, command=show_sound_menu).pack(side=tk.LEFT)
 
 
 # Bind right-click for Hitbox field to load presets
@@ -294,6 +331,7 @@ def add_attack():
         conditions = [c for c, v in condition_vars.items() if v.get()]
         upswing = float(fields["Upswing"].get() or 0.5)
         swing_sound_id = fields["Swing Sound ID"].get() or "bettercombat:sword_slash"
+        swing_sound_pitch = float(fields["Swing Sound Pitch"].get() or 0.0)
         attack = {
             "hitbox": fields["Hitbox"].get(),
             "conditions": conditions,
@@ -301,7 +339,7 @@ def add_attack():
             "angle": int(fields["Angle"].get()),
             "upswing": upswing,
             "animation": fields["Animation"].get(),
-            "swing_sound": {"id": swing_sound_id},
+            "swing_sound": {"id": swing_sound_id, "pitch": swing_sound_pitch},
             "attack_range_multiplier": float(fields["Attack Range Multiplier"].get() or 1.0),
             "attack_speed_multiplier": float(fields["Attack Speed Multiplier"].get() or 1.0),
             "movement_speed_multiplier": float(fields["Movement Speed Multiplier"].get() or 1.0),
@@ -338,6 +376,8 @@ def edit_attack():
         fields["Animation"].insert(0, attack.get("animation", ""))
         fields["Swing Sound ID"].delete(0, tk.END)
         fields["Swing Sound ID"].insert(0, attack.get("swing_sound", {}).get("id", ""))
+        fields["Swing Sound Pitch"].delete(0, tk.END)
+        fields["Swing Sound Pitch"].insert(0, str(attack.get("swing_sound", {}).get("pitch", 0.0)))
         for cond in condition_vars:
             condition_vars[cond].set(cond in attack.get("conditions", []))
         listbox.delete(index)
@@ -379,6 +419,9 @@ def save_json():
                 del filtered[opt]
         if "conditions" in filtered and not filtered["conditions"]:
             del filtered["conditions"]
+        if "swing_sound" in filtered:
+            if "pitch" in filtered["swing_sound"] and filtered["swing_sound"]["pitch"] == 0.0:
+                del filtered["swing_sound"]["pitch"]
         data["attributes"]["attacks"].append(filtered)
     file = filedialog.asksaveasfilename(initialfile=json_filename.get(), defaultextension=".json", filetypes=[("JSON Files", "*.json")])
     if file:
