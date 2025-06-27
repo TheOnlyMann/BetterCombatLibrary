@@ -14,12 +14,14 @@ json_filename = tk.StringVar(value="attribute.json")
 pose_defaults = {}
 attack_defaults = {}
 condition_enum = []
+sound_ids = []
 if os.path.exists(config_path):
     with open(config_path, "r", encoding="utf-8") as f:
         config = json.load(f)
         pose_defaults = config.get("pose", {})
         attack_defaults = config.get("attack", {})
         condition_enum = config.get("condition_enum", [])
+        sound_ids = config.get("sound_id", [])
 
 attacks = []
 
@@ -225,10 +227,18 @@ def set_anim_from_menu(widget, anim, hitbox):
     #if not fields["Hitbox"].get().strip():
     fields["Hitbox"].delete(0, tk.END)
     fields["Hitbox"].insert(0, hitbox)
-    angle = attack_defaults[hitbox][anim].get("angle")
+    anim_data = attack_defaults[hitbox][anim]
+    angle = anim_data.get("angle")
     if angle :#and not fields["Angle"].get().strip():
         fields["Angle"].delete(0, tk.END)
         fields["Angle"].insert(0, str(angle))
+    for key in ["damage_multiplier", "attack_range_multiplier", "attack_speed_multiplier", "movement_speed_multiplier"]:
+        val = anim_data.get(key)
+        if val is not None and key.replace("_", " ").title() in fields:
+            fields[key.replace("_", " ").title()].delete(0, tk.END)
+            fields[key.replace("_", " ").title()].insert(0, str(val))
+    for cond in condition_vars:
+        condition_vars[cond].set(cond in anim_data.get("conditions", []))
 
 # Conditions checklist, make it a two-column layout
 tk.Label(root, text="Conditions:").pack()
@@ -417,14 +427,35 @@ def update_config():
         anim = fields["Animation"].get()
         hitbox = fields["Hitbox"].get()
         angle = fields["Angle"].get()
+        damage_multiplier = fields["Damage Multiplier"].get()
+        attack_range_multiplier = fields["Attack Range Multiplier"].get()
+        attack_speed_multiplier = fields["Attack Speed Multiplier"].get()
+        movement_speed_multiplier = fields["Movement Speed Multiplier"].get()
+        conditions = [c for c, v in condition_vars.items() if v.get()]
         if anim and hitbox and angle:
             if hitbox not in attack_defaults:
                 attack_defaults[hitbox] = {}
-            attack_defaults[hitbox][anim] = {"angle": int(angle)}
+            attack_defaults[hitbox][anim] = {}
+        if angle:
+            attack_defaults[hitbox][anim]["angle"] = int(angle)
+        if damage_multiplier and damage_multiplier != "1.0":
+            attack_defaults[hitbox][anim]["damage_multiplier"] = float(damage_multiplier)
+        if attack_range_multiplier and attack_range_multiplier != "1.0":
+            attack_defaults[hitbox][anim]["attack_range_multiplier"] = float(attack_range_multiplier)
+        if attack_speed_multiplier and attack_speed_multiplier != "1.0":
+            attack_defaults[hitbox][anim]["attack_speed_multiplier"] = float(attack_speed_multiplier)
+        if movement_speed_multiplier and movement_speed_multiplier != "1.0":
+            attack_defaults[hitbox][anim]["movement_speed_multiplier"] = float(movement_speed_multiplier)
+        if conditions and conditions != []:
+            attack_defaults[hitbox][anim]["conditions"] = conditions
+        sound_id = fields["Swing Sound ID"].get().strip()
+        if sound_id and sound_id not in sound_ids:
+            sound_ids.append(sound_id)
     config_data = {
         "pose": pose_defaults,
         "attack": attack_defaults,
-        "condition_enum": condition_enum
+        "condition_enum": condition_enum,
+        "sound_id": sound_ids
     }
     with open(config_path, "w", encoding="utf-8") as f:
         json.dump(config_data, f, indent=2)
