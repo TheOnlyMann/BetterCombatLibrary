@@ -424,17 +424,18 @@ def update_config():
                 pose_defaults["one_handed"] = []
             if pose not in pose_defaults["one_handed"]:
                 pose_defaults["one_handed"].append(pose)
-        anim = fields["Animation"].get()
-        hitbox = fields["Hitbox"].get()
-        angle = fields["Angle"].get()
-        damage_multiplier = fields["Damage Multiplier"].get()
-        attack_range_multiplier = fields["Attack Range Multiplier"].get()
-        attack_speed_multiplier = fields["Attack Speed Multiplier"].get()
-        movement_speed_multiplier = fields["Movement Speed Multiplier"].get()
-        conditions = [c for c, v in condition_vars.items() if v.get()]
-        if anim and hitbox and angle:
-            if hitbox not in attack_defaults:
-                attack_defaults[hitbox] = {}
+    anim = fields["Animation"].get()
+    hitbox = fields["Hitbox"].get()
+    angle = fields["Angle"].get()
+    damage_multiplier = fields["Damage Multiplier"].get()
+    attack_range_multiplier = fields["Attack Range Multiplier"].get()
+    attack_speed_multiplier = fields["Attack Speed Multiplier"].get()
+    movement_speed_multiplier = fields["Movement Speed Multiplier"].get()
+    sound_id = fields["Swing Sound ID"].get().strip()
+    conditions = [c for c, v in condition_vars.items() if v.get()]
+    if anim and hitbox and angle:
+        if hitbox not in attack_defaults:
+            attack_defaults[hitbox] = {}
             attack_defaults[hitbox][anim] = {}
         if angle:
             attack_defaults[hitbox][anim]["angle"] = int(angle)
@@ -448,9 +449,8 @@ def update_config():
             attack_defaults[hitbox][anim]["movement_speed_multiplier"] = float(movement_speed_multiplier)
         if conditions and conditions != []:
             attack_defaults[hitbox][anim]["conditions"] = conditions
-        sound_id = fields["Swing Sound ID"].get().strip()
-        if sound_id and sound_id not in sound_ids:
-            sound_ids.append(sound_id)
+    if sound_id and sound_id not in sound_ids:
+        sound_ids.append(sound_id)
     config_data = {
         "pose": pose_defaults,
         "attack": attack_defaults,
