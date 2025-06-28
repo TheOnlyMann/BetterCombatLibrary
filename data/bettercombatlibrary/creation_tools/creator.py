@@ -130,7 +130,7 @@ def create_entry(label_text, default_value=""):
     entry.pack()
     fields[label_text] = entry
 
-create_entry("Hitbox")
+create_entry("Hitbox") # 6th entry, used for hitbox selection
 
 # Grouped entries side by side for Damage Multiplier, Angle, Upswing
 trio_frame = tk.Frame(root)
@@ -184,19 +184,28 @@ for label_text, default in [("Attack Range Multiplier", "1.0"), ("Attack Speed M
     entry.insert(0, default)
     entry.pack(side=tk.LEFT, padx=2)
     fields[label_text] = entry
+    # Add +/- buttons for each entry
     tk.Button(subframe, text="+", command=make_adjust_button(entry, +0.1),width=2).pack(side=tk.LEFT, padx=1)
     tk.Button(subframe, text="-", command=make_adjust_button(entry, -0.1),width=2).pack(side=tk.LEFT, padx=1)
 
-create_entry("Animation")
+create_entry("Animation") # 7th entry, used for animation selection
 tk.Label(root, text="Swing Sound ID and Pitch:").pack()
 sound_frame = tk.Frame(root)
 sound_frame.pack()
-sound_entry = tk.Entry(sound_frame, width=35)
+sound_entry = tk.Entry(sound_frame, width=35)# 8th entry, used for swing sound ID selection
 sound_entry.insert(0, "bettercombat:sword_slash")
 sound_entry.pack(side=tk.LEFT)
 fields["Swing Sound ID"] = sound_entry
 
-pitch_entry = tk.Entry(sound_frame, width=5)
+def show_sound_menu():
+    menu = tk.Menu(root, tearoff=0)
+    for sid in sound_ids:
+        menu.add_command(label=sid, command=lambda s=sid: sound_entry.delete(0, tk.END) or sound_entry.insert(0, s) or pitch_entry.delete(0, tk.END) or pitch_entry.insert(0, "0.0"))
+    menu.post(sound_entry.winfo_rootx(), sound_entry.winfo_rooty() + sound_entry.winfo_height())
+# Button to show sound options
+tk.Button(sound_frame, text="▼", width=2, command=show_sound_menu).pack(side=tk.LEFT)
+
+pitch_entry = tk.Entry(sound_frame, width=5)#part for the swing sound pitch
 pitch_entry.insert(0, "0.0")
 pitch_entry.pack(side=tk.LEFT, padx=2)
 fields["Swing Sound Pitch"] = pitch_entry
@@ -214,19 +223,9 @@ def make_pitch_adjust_button(entry_ref, delta):
         except ValueError:
             pass
     return adjust
-
+# Add +/- buttons for Swing Sound Pitch
 tk.Button(pitch_control, text="+", command=make_pitch_adjust_button(pitch_entry, +0.1), width=2).pack(side=tk.LEFT)
 tk.Button(pitch_control, text="-", command=make_pitch_adjust_button(pitch_entry, -0.1), width=2).pack(side=tk.LEFT)
-
-
-def show_sound_menu():
-    menu = tk.Menu(root, tearoff=0)
-    for sid in sound_ids:
-        menu.add_command(label=sid, command=lambda s=sid: sound_entry.delete(0, tk.END) or sound_entry.insert(0, s) or pitch_entry.delete(0, tk.END) or pitch_entry.insert(0, "0.0"))
-    menu.post(sound_entry.winfo_rootx(), sound_entry.winfo_rooty() + sound_entry.winfo_height())
-
-tk.Button(sound_frame, text="▼", width=2, command=show_sound_menu).pack(side=tk.LEFT)
-
 
 # Bind right-click for Hitbox field to load presets
 fields["Hitbox"].bind("<Button-3>", lambda event: show_hitbox_menu(event, fields["Hitbox"]))
