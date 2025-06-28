@@ -1,2 +1,6 @@
 animations/base/*.blend
 !animations/base/animation_template.blend
+assets/bettercombat
+assets/malfu_combat_animation
+data/bettercombat
+data/malfu_combat_animation

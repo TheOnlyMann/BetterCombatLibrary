@@ -85,7 +85,10 @@
         "angle": 0
       },
       "bettercombat:one_handed_stab_mounted": {
-        "angle": 0
+        "angle": 0,
+        "conditions": [
+          "MOUNTED"
+        ]
       },
       "bettercombat:two_handed_stab_left": {
         "angle": 60
