@@ -246,16 +246,61 @@ def set_hitbox_from_menu(event,widget, hitbox):
 fields["Animation"].bind("<Button-3>", lambda event: show_anim_menu(event, fields["Animation"]))
 
 def show_anim_menu(event, widget, hitbox=None):
-    menu = tk.Menu(root, tearoff=0)
-    for hitbox_type, anims in attack_defaults.items():
-        if hitbox is None or hitbox == hitbox_type:
-            # Only show animations for the selected hitbox type
-            if hitbox_type not in attack_defaults:
-                continue
-            # Add animations for the hitbox type
-            for anim in anims.keys():
-                menu.add_command(label=anim, command=lambda a=anim, h=hitbox_type: set_anim_from_menu(widget, a, h))
-    menu.post(event.x_root, event.y_root)
+    top = tk.Toplevel(root)
+    top.title("Select Animation")
+    top.geometry("400x400")
+
+    list_frame = tk.Frame(top)
+    list_frame.pack(fill=tk.BOTH, expand=True)
+
+    scrollbar = tk.Scrollbar(list_frame)
+    scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
+
+    anim_list = tk.Listbox(list_frame, yscrollcommand=scrollbar.set, selectmode=tk.SINGLE)
+    anim_list.pack(side=tk.LEFT, fill=tk.BOTH, expand=True)
+    scrollbar.config(command=anim_list.yview)
+
+    # Populate list with animations
+    for hb_type, anims in attack_defaults.items():
+        if hitbox is None or hb_type == hitbox:
+            for anim in anims:
+                if hitbox:
+                    name_prefix = ""
+                elif hb_type == "VERTICAL_PLANE":
+                    name_prefix ='[ | ] '
+                elif hb_type == "HORIZONTAL_PLANE":
+                    name_prefix = '[ - ] '
+                elif hb_type == "FORWARD_BOX":
+                    name_prefix = '[ · ] '
+                else:
+                    name_prefix = f"[{hb_type}] "
+                anim_list.insert(tk.END, f"{name_prefix}{anim}")
+
+    def on_select(event=None):
+        try:
+            selection = anim_list.get(anim_list.curselection())
+            
+            if hitbox:# If hitbox is specified, use it directly
+                hb_label = hitbox  
+                anim = selection
+            else:# If hitbox is not specified, parse the selection
+                hb_label, anim = selection.split("] ")
+                hb_label = hb_label[1:]
+                if hb_label == ' | ':
+                    hb_label = "VERTICAL_PLANE"
+                elif hb_label == ' - ':
+                    hb_label = "HORIZONTAL_PLANE"
+                elif hb_label == ' · ':
+                    hb_label = "FORWARD_BOX"
+
+            set_anim_from_menu(widget, anim, hb_label)
+            top.destroy()
+        except:
+            pass
+
+    anim_list.bind("<Double-1>", on_select)
+    tk.Button(top, text="Select", command=on_select).pack(pady=5)
+
 
 def set_anim_from_menu(widget, anim, hitbox):
     widget.delete(0, tk.END)
@@ -542,10 +587,10 @@ def update_config():
 btn_frame_row1 = tk.Frame(root)
 btn_frame_row1.pack(pady=0)
 tk.Button(btn_frame_row1, text="Add Attack", command=add_attack).pack(side=tk.LEFT,padx=0)
-tk.Button(btn_frame_row1, text="Edit Selected", command=edit_attack).pack(side=tk.LEFT,padx=0)
-tk.Button(btn_frame_row1, text="Delete Selected", command=delete_attack).pack(side=tk.LEFT,padx=0)
 tk.Button(btn_frame_row1, text="Load Selected", command=load_attack).pack(side=tk.LEFT,padx=0)
 tk.Button(btn_frame_row1, text="Update Selected", command=update_attack).pack(side=tk.LEFT,padx=0)
+tk.Button(btn_frame_row1, text="Edit Selected", command=edit_attack).pack(side=tk.LEFT,padx=0)
+tk.Button(btn_frame_row1, text="Delete Selected", command=delete_attack).pack(side=tk.LEFT,padx=0)
 btn_frame_row2 = tk.Frame(root)
 btn_frame_row2.pack(pady=0)
 tk.Button(btn_frame_row2, text="Save Attack String JSON", command=save_json).pack(side=tk.LEFT,padx=12)
