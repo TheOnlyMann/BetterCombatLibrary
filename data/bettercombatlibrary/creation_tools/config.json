@@ -13,6 +13,7 @@
       "bettercombat:pose_two_handed_polearm",
       "bettercombat:pose_two_handed_scythe",
       "bettercombat:pose_two_handed_sword",
+      "malfu_combat_animation:leftside_polearm_pose",
       "malfu_combat_animation:pose_two_handed_sword_fps_hold",
       "malfu_combat_animation:pose_two_handed_sword_hip",
       "malfu_combat_animation:pose_two_handed_sword_side"
@@ -37,6 +38,51 @@
       },
       "bettercombat:two_handed_slam_vertical_right": {
         "angle": 120
+      },
+      "malfu_combat_animation:axe_double_updown": {
+        "angle": 120,
+        "conditions": [
+          "DUAL_WIELDING_SAME_CATEGORY"
+        ]
+      },
+      "malfu_combat_animation:fist_uppercut": {
+        "angle": 60
+      },
+      "malfu_combat_animation:glaive_downup_lr": {
+        "angle": 120
+      },
+      "malfu_combat_animation:glaive_downup_rl": {
+        "angle": 120
+      },
+      "malfu_combat_animation:glaive_updown": {
+        "angle": 120
+      },
+      "malfu_combat_animation:katana_downup_slash_lr": {
+        "angle": 120
+      },
+      "malfu_combat_animation:katana_downup_slash_rl": {
+        "angle": 120
+      },
+      "malfu_combat_animation:katana_updown_slash_kendo": {
+        "angle": 120
+      },
+      "malfu_combat_animation:katana_updown_slash_lr": {
+        "angle": 120
+      },
+      "malfu_combat_animation:katana_updown_slash_rl": {
+        "angle": 120
+      },
+      "malfu_combat_animation:one_handed_swipe_vertical_rl": {
+        "angle": 90
+      },
+      "malfu_combat_animation:one_handed_swipe_vertical_lr": {
+        "angle": 90
+      },
+      "malfu_combat_animation:spear_updown_slash_rl": {
+        "angle": 120
+      },
+      "malfu_combat_animation:trident_rl_stabup": {
+        "angle": 60
       }
     },
     "HORIZONTAL_PLANE": {
@@ -63,20 +109,131 @@
       },
       "bettercombat:two_handed_spin": {
         "angle": 360
+      },
+      "malfu_combat_animation:axe_downup_lr": {
+        "angle": 90
+      },
+      "malfu_combat_animation:axe_rl": {
+        "angle": 90
+      },
+      "malfu_combat_animation:axe_updown_lr": {
+        "angle": 90
+      },
+      "malfu_combat_animation:axe_updown_rl": {
+        "angle": 90
+      },
+      "malfu_combat_animation:battlestaff_lr": {
+        "angle": 90
+      },
+      "malfu_combat_animation:battlestaff_rl_style": {
+        "angle": 90
+      },
+      "malfu_combat_animation:battlestaff_rl": {
+        "angle": 90
+      },
+      "malfu_combat_animation:cutlass_lr_hori": {
+        "angle": 90
+      },
+      "malfu_combat_animation:cutlass_lr": {
+        "angle": 90
+      },
+      "malfu_combat_animation:cutlass_rl_hori": {
+        "angle": 90
+      },
+      "malfu_combat_animation:cutlass_rl": {
+        "angle": 90
+      },
+      "malfu_combat_animation:dagger_lr": {
+        "angle": 60
+      },
+      "malfu_combat_animation:dagger_rl": {
+        "angle": 60
+      },
+      "malfu_combat_animation:glaive_lr": {
+        "angle": 120
+      },
+      "malfu_combat_animation:glaive_rl": {
+        "angle": 120
+      },
+      "malfu_combat_animation:halberd_lr": {
+        "angle": 120
+      },
+      "malfu_combat_animation:halberd_rl": {
+        "angle": 120
+      },
+      "malfu_combat_animation:katana_slash_lr": {
+        "angle": 120
+      },
+      "malfu_combat_animation:katana_slash_rl": {
+        "angle": 120
+      },
+      "malfu_combat_animation:one_handed_heavy_up_lr": {
+        "angle": 60
+      },
+      "malfu_combat_animation:one_handed_heavy_up_rl": {
+        "angle": 60
+      },
+      "malfu_combat_animation:one_handed_lr_rleg_lead": {
+        "angle": 90
+      },
+      "malfu_combat_animation:one_handed_lr": {
+        "angle": 90
+      },
+      "malfu_combat_animation:one_handed_rl": {
+        "angle": 90
+      },
+      "malfu_combat_animation:one_handed_swipe_horizontal_rl_hori": {
+        "angle": 90
+      },
+      "malfu_combat_animation:rapier_lr": {
+        "angle": 90
+      },
+      "malfu_combat_animation:rapier_rl_down": {
+        "angle": 90
+      },
+      "malfu_combat_animation:rapier_rl": {
+        "angle": 90
+      },
+      "malfu_combat_animation:spear_narrow_slash_lr": {
+        "angle": 90
+      },
+      "malfu_combat_animation:spear_narrow_slash_rl": {
+        "angle": 90
+      },
+      "malfu_combat_animation:two_handed_heavy_lr": {
+        "angle": 90
+      },
+      "malfu_combat_animation:two_handed_heavy_rl": {
+        "angle": 90
+      },
+      "malfu_combat_animation:two_handed_slice_lr": {
+        "angle": 90
+      },
+      "malfu_combat_animation:two_handed_slice_rl": {
+        "angle": 90
+      },
+      "malfu_combat_animation:two_handed_up_lr": {
+        "angle": 90
       }
     },
     "FORWARD_BOX": {
       "bettercombat:dual_handed_slash_cross": {
-        "angle": 150
+        "angle": 150,
+        "conditions": [
+          "DUAL_WIELDING_SAME_CATEGORY"
+        ]
       },
       "bettercombat:dual_handed_slash_uncross": {
-        "angle": 150
+        "angle": 150,
+        "conditions": [
+          "DUAL_WIELDING_SAME_CATEGORY"
+        ]
       },
       "bettercombat:dual_handed_stab": {
-        "angle": 150
-      },
-      "malfu_combat_animation:axe_double_updown": {
-        "angle": 150
+        "angle": 150,
+        "conditions": [
+          "DUAL_WIELDING_SAME_CATEGORY"
+        ]
       },
       "bettercombat:one_handed_punch": {
         "angle": 0
@@ -96,13 +253,31 @@
       "bettercombat:two_handed_stab_right": {
         "angle": 60
       },
-      "malfu_combat_animation:trident_rl_stab": {
+      "malfu_combat_animation:battlestaff_poke": {
+        "angle": 0
+      },
+      "malfu_combat_animation:dagger_lr_stab": {
+        "angle": 0
+      },
+      "malfu_combat_animation:dagger_rl_stab": {
+        "angle": 0
+      },
+      "malfu_combat_animation:fist_punch": {
+        "angle": 0
+      },
+      "malfu_combat_animation:rapier_lr_stab": {
+        "angle": 0
+      },
+      "malfu_combat_animation:rapier_stab": {
+        "angle": 0
+      },
+      "malfu_combat_animation:spear_stab_lr": {
         "angle": 0
       },
       "malfu_combat_animation:trident_lr_stab": {
         "angle": 0
       },
-      "malfu_combat_animation:trident_rl_stabup": {
+      "malfu_combat_animation:trident_rl_stab": {
         "angle": 0
       }
     }

@@ -327,23 +327,7 @@ scrollbar.pack(side=tk.RIGHT, fill=tk.Y)
 
 def add_attack():
     try:
-        conditions = [c for c, v in condition_vars.items() if v.get()]
-        upswing = float(fields["Upswing"].get() or 0.5)
-        swing_sound_id = fields["Swing Sound ID"].get() or "bettercombat:sword_slash"
-        swing_sound_pitch = float(fields["Swing Sound Pitch"].get() or 0.0)
-        attack = {
-            "hitbox": fields["Hitbox"].get(),
-            "conditions": conditions,
-            "damage_multiplier": float(fields["Damage Multiplier"].get() or 1.0),
-            "angle": int(fields["Angle"].get()),
-            "upswing": upswing,
-            "animation": fields["Animation"].get(),
-            "swing_sound": {"id": swing_sound_id, "pitch": swing_sound_pitch},
-            "attack_range_multiplier": float(fields["Attack Range Multiplier"].get() or 1.0),
-            "attack_speed_multiplier": float(fields["Attack Speed Multiplier"].get() or 1.0),
-            "movement_speed_multiplier": float(fields["Movement Speed Multiplier"].get() or 1.0),
-            "damage_type": ""
-        }
+        attack = generate_attack()
         attacks.append(attack)
         listbox.insert(tk.END, attack['animation'])
     except Exception as e:
@@ -356,6 +340,59 @@ def edit_attack():
             messagebox.showwarning("No selection", "Select an attack to edit.")
             return
         index = index[0]
+        extract_attack(index)
+        listbox.delete(index)
+        attacks.pop(index)
+    except Exception as e:
+        messagebox.showerror("Error", str(e))
+
+def load_attack():
+    try:
+        index = listbox.curselection()
+        if not index:
+            messagebox.showwarning("No selection", "Select an attack to load.")
+            return
+        index = index[0]
+        extract_attack(index)
+    except Exception as e:
+        messagebox.showerror("Error", str(e))
+
+def update_attack():
+    try:
+        index = listbox.curselection()
+        if not index:
+            messagebox.showwarning("No selection", "Select an attack to update.")
+            return
+        index = index[0]
+        attack = generate_attack()
+        attacks[index] = attack
+        listbox.delete(index)
+        listbox.insert(index, attack['animation'])
+    except Exception as e:
+        messagebox.showerror("Error", str(e))
+        
+
+def generate_attack():
+    conditions = [c for c, v in condition_vars.items() if v.get()]
+    upswing = float(fields["Upswing"].get() or 0.5)
+    swing_sound_id = fields["Swing Sound ID"].get() or "bettercombat:sword_slash"
+    swing_sound_pitch = float(fields["Swing Sound Pitch"].get() or 0.0)
+    attack = {
+        "hitbox": fields["Hitbox"].get(),
+        "conditions": conditions,
+        "damage_multiplier": float(fields["Damage Multiplier"].get() or 1.0),
+        "angle": int(fields["Angle"].get()),
+        "upswing": upswing,
+        "animation": fields["Animation"].get(),
+        "swing_sound": {"id": swing_sound_id, "pitch": swing_sound_pitch},
+        "attack_range_multiplier": float(fields["Attack Range Multiplier"].get() or 1.0),
+        "attack_speed_multiplier": float(fields["Attack Speed Multiplier"].get() or 1.0),
+        "movement_speed_multiplier": float(fields["Movement Speed Multiplier"].get() or 1.0),
+        "damage_type": ""
+    }
+    return attack
+def extract_attack(index):
+    try:
         attack = attacks[index]
         fields["Hitbox"].delete(0, tk.END)
         fields["Hitbox"].insert(0, attack.get("hitbox", ""))
@@ -379,8 +416,6 @@ def edit_attack():
         fields["Swing Sound Pitch"].insert(0, str(attack.get("swing_sound", {}).get("pitch", 0.0)))
         for cond in condition_vars:
             condition_vars[cond].set(cond in attack.get("conditions", []))
-        listbox.delete(index)
-        attacks.pop(index)
     except Exception as e:
         messagebox.showerror("Error", str(e))
 
@@ -504,13 +539,17 @@ def update_config():
     messagebox.showinfo("Saved", f"Config saved to {config_path}")
 
 # Buttons
-btn_frame = tk.Frame(root)
-btn_frame.pack()
-tk.Button(btn_frame, text="Add Attack", command=add_attack).pack(side=tk.LEFT)
-tk.Button(btn_frame, text="Edit Selected", command=edit_attack).pack(side=tk.LEFT)
-tk.Button(btn_frame, text="Delete Selected", command=delete_attack).pack(side=tk.LEFT)
-tk.Button(btn_frame, text="Save JSON", command=save_json).pack(side=tk.LEFT)
-tk.Button(btn_frame, text="Update Config", command=update_config).pack(side=tk.LEFT)
-tk.Button(btn_frame, text="Load JSON", command=load_json).pack(side=tk.LEFT)
+btn_frame_row1 = tk.Frame(root)
+btn_frame_row1.pack(pady=0)
+tk.Button(btn_frame_row1, text="Add Attack", command=add_attack).pack(side=tk.LEFT,padx=0)
+tk.Button(btn_frame_row1, text="Edit Selected", command=edit_attack).pack(side=tk.LEFT,padx=0)
+tk.Button(btn_frame_row1, text="Delete Selected", command=delete_attack).pack(side=tk.LEFT,padx=0)
+tk.Button(btn_frame_row1, text="Load Selected", command=load_attack).pack(side=tk.LEFT,padx=0)
+tk.Button(btn_frame_row1, text="Update Selected", command=update_attack).pack(side=tk.LEFT,padx=0)
+btn_frame_row2 = tk.Frame(root)
+btn_frame_row2.pack(pady=0)
+tk.Button(btn_frame_row2, text="Save Attack String JSON", command=save_json).pack(side=tk.LEFT,padx=12)
+tk.Button(btn_frame_row2, text="Update Config", command=update_config).pack(side=tk.LEFT,padx=12)
+tk.Button(btn_frame_row2, text="Load Attack String JSON", command=load_json).pack(side=tk.LEFT,padx=12)
 
 root.mainloop()
