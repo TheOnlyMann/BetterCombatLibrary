@@ -5,7 +5,9 @@
     "attacks": [
       {
         "hitbox": "HORIZONTAL_PLANE",
-        "conditions":["MAIN_HAND_ONLY"],
+        "conditions": [
+          "MAIN_HAND_ONLY"
+        ],
         "damage_multiplier": 0.9,
         "angle": 135,
         "upswing": 0.5,
@@ -16,7 +18,9 @@
       },
       {
         "hitbox": "FORWARD_BOX",
-        "conditions":["NOT_DUAL_WIELDING"],
+        "conditions": [
+          "NOT_DUAL_WIELDING"
+        ],
         "damage_multiplier": 1.2,
         "angle": 0,
         "upswing": 0.5,
@@ -27,7 +31,10 @@
       },
       {
         "hitbox": "VERTICAL_PLANE",
-        "conditions":["MAIN_HAND_ONLY","NO_OFFHAND_ITEM"],
+        "conditions": [
+          "MAIN_HAND_ONLY",
+          "NO_OFFHAND_ITEM"
+        ],
         "damage_multiplier": 1.3,
         "angle": 90,
         "upswing": 0.5,
@@ -38,7 +45,10 @@
       },
       {
         "hitbox": "FORWARD_BOX",
-        "conditions":["MAIN_HAND_ONLY","DUAL_WIELDING_ANY"],
+        "conditions": [
+          "MAIN_HAND_ONLY",
+          "DUAL_WIELDING_ANY"
+        ],
         "damage_multiplier": 1.2,
         "angle": 90,
         "upswing": 0.5,
@@ -49,7 +59,10 @@
         }
       },
       {
-        "conditions": ["DUAL_WIELDING_ANY", "OFF_HAND_ONLY"],
+        "conditions": [
+          "DUAL_WIELDING_ANY",
+          "OFF_HAND_ONLY"
+        ],
         "hitbox": "VERTICAL_PLANE",
         "damage_multiplier": 0.8,
         "angle": 90,
@@ -61,7 +74,9 @@
         }
       },
       {
-        "conditions": ["DUAL_WIELDING_ANY"],
+        "conditions": [
+          "DUAL_WIELDING_ANY"
+        ],
         "hitbox": "HORIZONTAL_PLANE",
         "damage_multiplier": 0.8,
         "angle": 90,

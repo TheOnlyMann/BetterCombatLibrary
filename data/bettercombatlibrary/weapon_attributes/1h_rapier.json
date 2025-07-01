@@ -5,7 +5,6 @@
     "attacks": [
       {
         "hitbox": "FORWARD_BOX",
-        "damage_multiplier": 1.0,
         "angle": 90,
         "upswing": 0.3,
         "animation": "bettercombat:one_handed_stab",
@@ -15,7 +14,10 @@
       },
       {
         "hitbox": "FORWARD_BOX",
-        "conditions":["NOT_DUAL_WIELDING", "NO_OFFHAND_ITEM"],
+        "conditions": [
+          "NOT_DUAL_WIELDING",
+          "NO_OFFHAND_ITEM"
+        ],
         "damage_multiplier": 1.2,
         "angle": 0,
         "upswing": 0.5,
@@ -27,7 +29,6 @@
       },
       {
         "hitbox": "FORWARD_BOX",
-        "damage_multiplier": 1.0,
         "angle": 90,
         "upswing": 0.3,
         "animation": "bettercombat:one_handed_stab",
@@ -37,7 +38,9 @@
       },
       {
         "hitbox": "HORIZONTAL_PLANE",
-        "conditions": ["MAIN_HAND_ONLY"],
+        "conditions": [
+          "MAIN_HAND_ONLY"
+        ],
         "damage_multiplier": 0.8,
         "angle": 90,
         "upswing": 0.5,
@@ -48,7 +51,10 @@
       },
       {
         "hitbox": "FORWARD_BOX",
-        "conditions":["NOT_DUAL_WIELDING", "NO_OFFHAND_ITEM"],
+        "conditions": [
+          "NOT_DUAL_WIELDING",
+          "NO_OFFHAND_ITEM"
+        ],
         "damage_multiplier": 1.4,
         "angle": 0,
         "upswing": 0.5,
@@ -59,7 +65,10 @@
         }
       },
       {
-        "conditions": ["DUAL_WIELDING_SAME_CATEGORY", "MAIN_HAND_ONLY"],
+        "conditions": [
+          "DUAL_WIELDING_SAME_CATEGORY",
+          "MAIN_HAND_ONLY"
+        ],
         "hitbox": "FORWARD_BOX",
         "damage_multiplier": 1.2,
         "angle": 120,
@@ -70,7 +79,10 @@
         }
       },
       {
-        "conditions": ["DUAL_WIELDING_ANY", "OFF_HAND_ONLY"],
+        "conditions": [
+          "DUAL_WIELDING_ANY",
+          "OFF_HAND_ONLY"
+        ],
         "hitbox": "VERTICAL_PLANE",
         "damage_multiplier": 0.8,
         "angle": 90,
@@ -83,8 +95,10 @@
       },
       {
         "hitbox": "FORWARD_BOX",
-        "damage_multiplier": 1.0,
-        "conditions": ["DUAL_WIELDING_ANY", "OFF_HAND_ONLY"],
+        "conditions": [
+          "DUAL_WIELDING_ANY",
+          "OFF_HAND_ONLY"
+        ],
         "angle": 90,
         "upswing": 0.3,
         "animation": "bettercombat:one_handed_stab",

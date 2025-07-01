@@ -14,7 +14,10 @@
         }
       },
       {
-        "conditions": ["DUAL_WIELDING_SAME_CATEGORY", "MAIN_HAND_ONLY"],
+        "conditions": [
+          "DUAL_WIELDING_SAME_CATEGORY",
+          "MAIN_HAND_ONLY"
+        ],
         "hitbox": "FORWARD_BOX",
         "damage_multiplier": 1.7,
         "angle": 150,
@@ -35,7 +38,10 @@
         }
       },
       {
-        "conditions": ["DUAL_WIELDING_SAME_CATEGORY", "OFF_HAND_ONLY"],
+        "conditions": [
+          "DUAL_WIELDING_SAME_CATEGORY",
+          "OFF_HAND_ONLY"
+        ],
         "hitbox": "FORWARD_BOX",
         "damage_multiplier": 1.2,
         "angle": 150,
@@ -47,7 +53,9 @@
       },
       {
         "hitbox": "HORIZONTAL_PLANE",
-        "conditions": ["DUAL_WIELDING_SAME_CATEGORY"],
+        "conditions": [
+          "DUAL_WIELDING_SAME_CATEGORY"
+        ],
         "damage_multiplier": 0.8,
         "angle": 90,
         "upswing": 0.5,
@@ -57,7 +65,10 @@
         }
       },
       {
-        "conditions": ["DUAL_WIELDING_SAME_CATEGORY", "MAIN_HAND_ONLY"],
+        "conditions": [
+          "DUAL_WIELDING_SAME_CATEGORY",
+          "MAIN_HAND_ONLY"
+        ],
         "hitbox": "FORWARD_BOX",
         "damage_multiplier": 1.7,
         "angle": 150,
@@ -69,7 +80,9 @@
       },
       {
         "hitbox": "HORIZONTAL_PLANE",
-        "conditions": ["DUAL_WIELDING_SAME_CATEGORY"],
+        "conditions": [
+          "DUAL_WIELDING_SAME_CATEGORY"
+        ],
         "damage_multiplier": 0.8,
         "angle": 90,
         "upswing": 0.5,
@@ -79,7 +92,10 @@
         }
       },
       {
-        "conditions": ["DUAL_WIELDING_SAME_CATEGORY", "OFF_HAND_ONLY"],
+        "conditions": [
+          "DUAL_WIELDING_SAME_CATEGORY",
+          "OFF_HAND_ONLY"
+        ],
         "hitbox": "FORWARD_BOX",
         "damage_multiplier": 1.2,
         "angle": 150,
@@ -91,7 +107,9 @@
       },
       {
         "hitbox": "VERTICAL_PLANE",
-        "conditions": ["NOT_DUAL_WIELDING"],
+        "conditions": [
+          "NOT_DUAL_WIELDING"
+        ],
         "damage_multiplier": 0.8,
         "angle": 90,
         "upswing": 0.5,
@@ -102,7 +120,9 @@
       },
       {
         "hitbox": "FORWARD_BOX",
-        "conditions": ["NOT_DUAL_WIELDING"],
+        "conditions": [
+          "NOT_DUAL_WIELDING"
+        ],
         "damage_multiplier": 0.8,
         "angle": 90,
         "upswing": 0.5,

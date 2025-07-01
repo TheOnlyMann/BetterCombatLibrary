@@ -6,7 +6,6 @@
       {
         "hitbox": "VERTICAL_PLANE",
         "angle": 90,
-        "damage_multiplier": 1,
         "upswing": 0.5,
         "animation": "bettercombat:one_handed_slam",
         "swing_sound": {
@@ -15,7 +14,10 @@
       },
       {
         "hitbox": "VERTICAL_PLANE",
-        "conditions":["MAIN_HAND_ONLY","DUAL_WIELDING_ANY"],
+        "conditions": [
+          "MAIN_HAND_ONLY",
+          "DUAL_WIELDING_ANY"
+        ],
         "damage_multiplier": 0.8,
         "angle": 90,
         "upswing": 0.3,
@@ -26,7 +28,9 @@
       },
       {
         "hitbox": "VERTICAL_PLANE",
-        "conditions":["OFF_HAND_ONLY"],
+        "conditions": [
+          "OFF_HAND_ONLY"
+        ],
         "damage_multiplier": 0.8,
         "angle": 90,
         "upswing": 0.3,
@@ -37,7 +41,10 @@
       },
       {
         "hitbox": "VERTICAL_PLANE",
-        "conditions":["MAIN_HAND_ONLY","NOT_DUAL_WIELDING"],
+        "conditions": [
+          "MAIN_HAND_ONLY",
+          "NOT_DUAL_WIELDING"
+        ],
         "damage_multiplier": 1.3,
         "angle": 90,
         "upswing": 0.5,
@@ -48,7 +55,10 @@
       },
       {
         "hitbox": "VERTICAL_PLANE",
-        "conditions":["MAIN_HAND_ONLY","NO_OFFHAND_ITEM"],
+        "conditions": [
+          "MAIN_HAND_ONLY",
+          "NO_OFFHAND_ITEM"
+        ],
         "damage_multiplier": 1.5,
         "angle": 90,
         "upswing": 0.5,

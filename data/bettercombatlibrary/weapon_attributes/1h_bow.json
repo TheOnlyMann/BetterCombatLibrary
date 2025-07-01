@@ -5,8 +5,9 @@
     "attacks": [
       {
         "hitbox": "HORIZONTAL_PLANE",
-        "conditions":["NOT_DUAL_WIELDING"],
-        "damage_multiplier": 1,
+        "conditions": [
+          "NOT_DUAL_WIELDING"
+        ],
         "angle": 90,
         "upswing": 0.3,
         "animation": "bettercombat:two_handed_slash_horizontal_right",

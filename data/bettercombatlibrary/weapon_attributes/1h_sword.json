@@ -15,7 +15,9 @@
       },
       {
         "hitbox": "HORIZONTAL_PLANE",
-        "conditions":["NOT_DUAL_WIELDING"],
+        "conditions": [
+          "NOT_DUAL_WIELDING"
+        ],
         "damage_multiplier": 0.9,
         "angle": 120,
         "upswing": 0.5,
@@ -26,7 +28,10 @@
       },
       {
         "hitbox": "HORIZONTAL_PLANE",
-        "conditions":["MAIN_HAND_ONLY","NO_OFFHAND_ITEM"],
+        "conditions": [
+          "MAIN_HAND_ONLY",
+          "NO_OFFHAND_ITEM"
+        ],
         "damage_multiplier": 0.8,
         "angle": 360,
         "upswing": 0.5,
@@ -36,7 +41,10 @@
         }
       },
       {
-        "conditions": ["DUAL_WIELDING_SAME_CATEGORY", "MAIN_HAND_ONLY"],
+        "conditions": [
+          "DUAL_WIELDING_SAME_CATEGORY",
+          "MAIN_HAND_ONLY"
+        ],
         "hitbox": "FORWARD_BOX",
         "damage_multiplier": 1.2,
         "angle": 180,
@@ -47,7 +55,10 @@
         }
       },
       {
-        "conditions": ["DUAL_WIELDING_SAME_CATEGORY", "OFF_HAND_ONLY"],
+        "conditions": [
+          "DUAL_WIELDING_SAME_CATEGORY",
+          "OFF_HAND_ONLY"
+        ],
         "hitbox": "FORWARD_BOX",
         "damage_multiplier": 1.2,
         "angle": 180,
