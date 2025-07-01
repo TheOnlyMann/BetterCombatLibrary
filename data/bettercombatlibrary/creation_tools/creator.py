@@ -512,6 +512,8 @@ def load_json():
     file = filedialog.askopenfilename(filetypes=[("JSON Files", "*.json")])
     if file:
         with open(file, "r", encoding="utf-8") as f:
+            rawfilename = os.path.basename(file)
+            json_filename.set(rawfilename)  # Update the filename entry
             data = json.load(f)
             attrs = data.get("attributes", {})
             category_var.set(attrs.get("category", ""))
