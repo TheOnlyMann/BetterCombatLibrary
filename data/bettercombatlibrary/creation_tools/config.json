@@ -83,6 +83,45 @@
       },
       "malfu_combat_animation:trident_rl_stabup": {
         "angle": 60
+      },
+      "malfu_combat_animation:claw_double_ii": {
+        "angle": 90,
+        "conditions": [
+          "DUAL_WIELDING_SAME_CATEGORY"
+        ]
+      },
+      "malfu_combat_animation:claw_double_u": {
+        "angle": 90,
+        "conditions": [
+          "DUAL_WIELDING_SAME_CATEGORY"
+        ]
+      },
+      "malfu_combat_animation:claw_updown": {
+        "angle": 90
+      },
+      "malfu_combat_animation:doubleaxe_updown_lr": {
+        "angle": 90
+      },
+      "malfu_combat_animation:doubleaxe_updown_rl": {
+        "angle": 90
+      },
+      "malfu_combat_animation:er_sword_updown_lr": {
+        "angle": 90
+      },
+      "malfu_combat_animation:er_sword_updown_rl": {
+        "angle": 90
+      },
+      "malfu_combat_animation:er_sword_vert_lr": {
+        "angle": 90
+      },
+      "malfu_combat_animation:greathammer_slam_lr": {
+        "angle": 120
+      },
+      "malfu_combat_animation:greathammer_slam_rl": {
+        "angle": 120
+      },
+      "malfu_combat_animation:two_handed_downup_rl": {
+        "angle": 120
       }
     },
     "HORIZONTAL_PLANE": {
@@ -214,6 +253,66 @@
       },
       "malfu_combat_animation:two_handed_up_lr": {
         "angle": 90
+      },
+      "malfu_combat_animation:claw_lr": {
+        "angle": 90
+      },
+      "malfu_combat_animation:claw_rl": {
+        "angle": 90
+      },
+      "malfu_combat_animation:claymore_hori_lr": {
+        "angle": 120
+      },
+      "malfu_combat_animation:claymore_hori_rl": {
+        "angle": 120
+      },
+      "malfu_combat_animation:claymore_lrl": {
+        "angle": 120
+      },
+      "malfu_combat_animation:claymore_rlr": {
+        "angle": 120
+      },
+      "malfu_combat_animation:claymore_rotate_rl": {
+        "angle": 120
+      },
+      "malfu_combat_animation:doubleaxe_hori_lr": {
+        "angle": 120
+      },
+      "malfu_combat_animation:doubleaxe_hori_rl": {
+        "angle": 120
+      },
+      "malfu_combat_animation:doubleaxe_lrl": {
+        "angle": 120
+      },
+      "malfu_combat_animation:greataxe_lr": {
+        "angle": 120
+      },
+      "malfu_combat_animation:greataxe_rl": {
+        "angle": 120
+      },
+      "malfu_combat_animation:greathammer_slamslash_lr": {
+        "angle": 120
+      },
+      "malfu_combat_animation:greathammer_slamslash_rl": {
+        "angle": 120
+      },
+      "malfu_combat_animation:greatsword_lr": {
+        "angle": 120
+      },
+      "malfu_combat_animation:greatsword_rl": {
+        "angle": 120
+      },
+      "malfu_combat_animation:meat_shredder_lr": {
+        "angle": 120
+      },
+      "malfu_combat_animation:meat_shredder_rl": {
+        "angle": 120
+      },
+      "malfu_combat_animation:trident_lr": {
+        "angle": 90
+      },
+      "malfu_combat_animation:trident_rl": {
+        "angle": 90
       }
     },
     "FORWARD_BOX": {
@@ -279,6 +378,24 @@
       },
       "malfu_combat_animation:trident_rl_stab": {
         "angle": 0
+      },
+      "malfu_combat_animation:claymore_stab_lr": {
+        "angle": 0
+      },
+      "malfu_combat_animation:claymore_stab_rl": {
+        "angle": 0
+      },
+      "malfu_combat_animation:er_sword_double_cross_slash": {
+        "angle": 150,
+        "conditions": [
+          "DUAL_WIELDING_SAME_CATEGORY"
+        ]
+      },
+      "malfu_combat_animation:er_sword_double_stab": {
+        "angle": 150,
+        "conditions": [
+          "DUAL_WIELDING_SAME_CATEGORY"
+        ]
       }
     }
   },
